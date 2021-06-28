@@ -1,5 +1,6 @@
 <div class="task">
-  <h3>{{task.text}} <fa-icon 
+  <h3>{{task.text}} <fa-icon
+    (click) = "onDelete(task)" 
     [icon] = "faTimes"
     [ngStyle]="{'color': 'red'}"
   ></fa-icon></h3>
