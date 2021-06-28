@@ -15,6 +15,10 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getTasks().subscribe((tasks) => this.tasks = tasks);
   }
+
+  // delete tasks: deleteTask function is in task.server.ts file
+  // subscrible will not return anything
+  // it just loops through the tasks array and not show the deleted task
   deleteTask(task: Task){
     this.taskService.deleteTask(task).subscribe(() => this.tasks = this.tasks.filter((t) => t.id !== task.id ));
   }
