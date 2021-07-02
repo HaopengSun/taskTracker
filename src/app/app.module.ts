@@ -22,6 +22,7 @@ import { TaskItemComponent } from './components/task-item/task-item.component';
     FontAwesomeModule,
     HttpClientModule
   ],
+  // dependencies are be put inside the providers array i.e. TaskService
   providers: [],
   bootstrap: [AppComponent]
 })
