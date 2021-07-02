@@ -52,3 +52,22 @@ let point3 = new Point3(1, 2)
 // console.log(point3.getX())
 console.log(point3.X)
 point3.X = 10
+
+// f2 change the name of variable
+class Point4 {
+  constructor(private _x?: number, private _y?: number){}
+
+  public draw(){
+    console.log(this._x, this._y)
+  }
+
+  get x(){
+    return this._x
+  }
+
+  // set x with validation
+  set x(value){
+    if (value > 5) throw new Error('value cannot be smaller than 5')
+    this._x = value
+  }
+}
