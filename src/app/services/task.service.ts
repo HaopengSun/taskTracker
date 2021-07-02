@@ -5,6 +5,12 @@ import { Observable, of } from 'rxjs'
 // similar to axios in react to interact with backend server
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,5 +31,10 @@ export class TaskService {
   deleteTask(task: Task): Observable<Task> {
     const url = `${this.apiUrl}/${task.id}`
     return this.http.delete<Task>(url)
+  }
+
+  updateTaskReminder(task: Task): Observable<Task>{
+    const url = `${this.apiUrl}/${task.id}`
+    return this.http.put<Task>(url, task, httpOptions)
   }
 }

@@ -24,4 +24,12 @@ export class TasksComponent implements OnInit {
     this.taskService.deleteTask(task).subscribe(() => this.tasks = this.tasks.filter((t) => t.id !== task.id ));
   }
 
+  toggleTask(task: Task){
+    // console.log(task)
+    // set the opposite value but did not interact with the server
+    task.reminder = !task.reminder
+    // use the updateTaskReminder function in the taskService class
+    this.taskService.updateTaskReminder(task).subscribe()
+  }
+
 }
