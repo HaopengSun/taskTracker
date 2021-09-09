@@ -4,6 +4,7 @@ const router = express.Router()
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
+const Todo = require('../models/todo')
 
 const mongoose = require('mongoose');
 
