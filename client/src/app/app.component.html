@@ -17,8 +17,8 @@
         <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
         <a class="nav-link" *ngIf="!_authService.loggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
         <a class="nav-link" *ngIf="_authService.loggedIn()" style="cursor: pointer"
-         (click)="_authService.logout()"
-        >Logout</a>
+         (click)="_authService.logout()">Logout</a>
+        <a class="nav-link" *ngIf="_authService.loggedIn()">{{_authService.userName}}</a>
     </ul>
   </div>
 </nav>
