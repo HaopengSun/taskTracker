@@ -15,6 +15,7 @@ export class TodoComponent implements OnInit {
   constructor(private _auth: AuthService, private _router: Router, private _todo: TodoService) { }
 
   ngOnInit(): void {
+    this.getTodos()
   }
 
   backToHome(){
@@ -24,12 +25,15 @@ export class TodoComponent implements OnInit {
   postNewTodo(){
     console.log(this._auth.userName)
     this._todo.addTodo(this.todoData).subscribe(
-      res => {
-        console.log(res)
-      },
-      err => {
-        console.log(err)
-      }
+      res => console.log(res),
+      err => console.log(err)
+    )
+  }
+
+  getTodos(){
+    this._todo.getTodos().subscribe(
+      res => console.log(res[0].content, res[0].isFinished),
+      err => console.log(err)
     )
   }
 

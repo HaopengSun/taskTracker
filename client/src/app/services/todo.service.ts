@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Todo from '../Todo'
 import { Router } from '@angular/router';
 
@@ -16,5 +16,11 @@ export class TodoService {
     const token = localStorage.getItem('token')
     const data = {...todo, token}
     return this.http.post<any>(this._addTodoUrl, data)
+  }
+
+  getTodos(){
+    const token: any = localStorage.getItem('token')
+    let headers: HttpHeaders = new HttpHeaders().append("Authentication", token)
+    return this.http.get<any>(this._addTodoUrl, {headers})
   }
 }

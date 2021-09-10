@@ -77,19 +77,33 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/todo', (req, res) => {
-  let { content, isFinished } = req.body
-  const todoData = { content, isFinished }
   const token = req.body.token
+  let id = jwt.verify(token, 'secretKey')
+  let { content, isFinished } = req.body
+  const todoData = { content, isFinished, owner: id.subject }
   let todo = new Todo(todoData)
   todo.save().then(
     (result) => {
-      let id = jwt.verify(token, 'secretKey')
-      res.status(200).send(result)
-      return User.findByIdAndUpdate(id.subject, {$push: {todos: todo}})
+      return User.findByIdAndUpdate(id.subject, {$push: {todos: todo}}).then(response => {
+        res.status(200).send(result)
+      })
     }
   ).catch(
     (err) => console.log(err)
   );
+})
+
+router.get('/todo', (req, res) => {
+  let token = req.headers.authorization.split(' ')[1]
+  let payload = jwt.verify(token, 'secretKey')
+  User.findOne({_id: payload.subject}, (err, advance) => {
+    console.log(advance.todos)
+    Todo.find({
+      _id:{$in: advance.todos}
+    }, (err, adv) => {
+      res.status(200).send(adv)
+    })
+  })
 })
 
 module.exports = router;
