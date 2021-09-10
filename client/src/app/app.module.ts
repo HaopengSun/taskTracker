@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth.guard';
+import { TodoService } from './services/todo.service'
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
@@ -27,7 +28,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard, {
+  providers: [AuthService, AuthGuard, TodoService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true

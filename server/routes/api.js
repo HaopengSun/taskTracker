@@ -76,4 +76,16 @@ router.post('/login', (req, res) => {
   })
 })
 
+router.post('/todo', (req, res) => {
+  let todoData = req.body
+  let todo = new Todo(todoData)
+  todo.save().then(
+    (result) => {
+      res.status(200).send(result)
+    }
+  ).catch(
+    (err) => console.log(err)
+  );
+})
+
 module.exports = router;
