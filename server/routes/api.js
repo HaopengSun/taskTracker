@@ -77,11 +77,15 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/todo', (req, res) => {
-  let todoData = req.body
+  let { content, isFinished } = req.body
+  const todoData = { content, isFinished }
+  const token = req.body.token
   let todo = new Todo(todoData)
   todo.save().then(
     (result) => {
+      let id = jwt.verify(token, 'secretKey')
       res.status(200).send(result)
+      return User.findByIdAndUpdate(id.subject, {$push: {todos: todo}})
     }
   ).catch(
     (err) => console.log(err)
