@@ -97,13 +97,19 @@ router.get('/todo', (req, res) => {
   let token = req.headers.authorization.split(' ')[1]
   let payload = jwt.verify(token, 'secretKey')
   User.findOne({_id: payload.subject}, (err, advance) => {
-    console.log(advance.todos)
     Todo.find({
       _id:{$in: advance.todos}
     }, (err, adv) => {
       res.status(200).send(adv)
     })
   })
+})
+
+router.put('/todo', (req, res) => {
+  let content = req.body.content
+  Todo.findOne({content: content}, {$set: {"isFinished": true}}, (err, advance) => {
+    res.status(200).send(advance)
+    })
 })
 
 module.exports = router;

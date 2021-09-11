@@ -47,6 +47,11 @@ export class TodoComponent implements OnInit {
         },
         err => console.log(err)
       )
-  }
+    }
+
+    editTodo(todo: Todo){
+      this._todo.editTodo(todo).subscribe()
+      this.getTodos()
+    }
 
 }

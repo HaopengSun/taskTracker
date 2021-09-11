@@ -18,6 +18,12 @@ export class TodoService {
     return this.http.post<any>(this._addTodoUrl, data)
   }
 
+  editTodo(todo: Todo){
+    const token = localStorage.getItem('token')
+    const data = {...todo, token}
+    return this.http.put<any>(this._addTodoUrl, data)
+  }
+
   getTodos(){
     const token: any = localStorage.getItem('token')
     let headers: HttpHeaders = new HttpHeaders().append("Authentication", token)

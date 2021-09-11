@@ -22,4 +22,5 @@
 <app-todo-item
 *ngFor = "let todo of todos"
 [todo]="todo"
+(editTodo)="editTodo(todo)"
 ></app-todo-item>
