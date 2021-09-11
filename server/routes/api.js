@@ -107,9 +107,11 @@ router.get('/todo', (req, res) => {
 
 router.put('/todo', (req, res) => {
   let content = req.body.content
-  Todo.findOne({content: content}, {$set: {"isFinished": true}}, (err, advance) => {
-    res.status(200).send(advance)
+  Todo.findOne({content}, (err, advance) => {
+    Todo.findOneAndUpdate({content}, {isFinished: !advance.isFinished}, (e, a) => {
+      res.status(200).send(a)
     })
+  })
 })
 
 module.exports = router;

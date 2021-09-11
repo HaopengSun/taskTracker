@@ -3,6 +3,7 @@
     <h5 class="card-title">title: {{todo.content}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{todo.isFinished}}</h6>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <button (click)="onEdit(todo)" class="btn btn-primary float-right mt-2">Finished</button>
+    <button (click)="onEdit(todo)" *ngIf="todo.isFinished" class="btn btn-primary float-right mt-2">Unfinished</button>
+    <button (click)="onEdit(todo)" *ngIf="!todo.isFinished" class="btn btn-primary float-right mt-2">Finished</button>
   </div>
 </div>
