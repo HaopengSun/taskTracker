@@ -28,9 +28,13 @@ export class TodoComponent implements OnInit {
   postNewTodo(){
     console.log(this._auth.userName)
     this._todo.addTodo(this.todoData).subscribe(
-      res => console.log(res),
+      res => {
+        console.log(res);
+        this.getTodos()
+      },
       err => console.log(err)
       )
+    this.todoData = {"content": '', "isFinished": false}
     }
 
     getTodos(){
