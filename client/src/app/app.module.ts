@@ -13,6 +13,7 @@ import { AuthGuard } from './auth.guard';
 import { TodoService } from './services/todo.service'
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { TodoItemComponent } from './components/todo-item/todo-item.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     LoginComponent,
     RegisterComponent,
     TodoComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    TodoItemComponent
   ],
   imports: [
     BrowserModule,

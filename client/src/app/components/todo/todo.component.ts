@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { TodoService } from '../../services/todo.service';
+import Todo from './../../Todo';
 
 @Component({
   selector: 'app-todo',
@@ -10,7 +11,9 @@ import { TodoService } from '../../services/todo.service';
 })
 export class TodoComponent implements OnInit {
 
-  todoData = {"content": '', "isFinished": false}
+  public todoData = {"content": '', "isFinished": false}
+
+  public todos: Todo[] = []
 
   constructor(private _auth: AuthService, private _router: Router, private _todo: TodoService) { }
 
@@ -27,14 +30,19 @@ export class TodoComponent implements OnInit {
     this._todo.addTodo(this.todoData).subscribe(
       res => console.log(res),
       err => console.log(err)
-    )
-  }
+      )
+    }
 
-  getTodos(){
-    this._todo.getTodos().subscribe(
-      res => console.log(res[0].content, res[0].isFinished),
-      err => console.log(err)
-    )
+    getTodos(){
+      this._todo.getTodos().subscribe(
+        res => {
+          this.todos = res.map((r: any) => {
+            return {content: r.content, isFinished: r.isFinished}
+          })
+          console.log(this.todos)
+        },
+        err => console.log(err)
+      )
   }
 
 }
